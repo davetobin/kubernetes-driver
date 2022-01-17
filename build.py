@@ -168,8 +168,8 @@ class Builder:
         if args.post_version is None:
             raise ValueError('Must set --post-version when releasing')
         self.build()
-        if args.skip_docker is not True:
-            self.push_docker_image()
+        # if args.skip_docker is not True:
+        #     self.push_docker_image()
         self.push_release_git_changes()
 
     def init_artifacts_directory(self):
@@ -333,6 +333,7 @@ class Builder:
             repo.index.add([os.path.join(PKG_ROOT, PKG_INFO)])
             repo.index.commit('Update version for development')
             origin = repo.remote('origin')
+            # origin.set_url(new_url: str, old_url: origin_url)
             origin.push(tags=True)
             origin.push()
 
